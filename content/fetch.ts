@@ -2,10 +2,12 @@ export const contentGqlFetcher = async <T>({
   query,
   variables = {},
   preview = false,
+  tags = [],
 }: {
   query: string;
   variables?: any;
   preview?: boolean;
+  tags?: string[];
 }): Promise<T | undefined> => {
   console.log(
     `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`
@@ -21,6 +23,10 @@ export const contentGqlFetcher = async <T>({
           : `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
       },
       body: JSON.stringify({ query, variables }),
+      next: {
+        tags,
+        revalidate: 10,
+      },
     }
   );
 

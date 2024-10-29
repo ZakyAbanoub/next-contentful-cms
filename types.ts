@@ -1,3 +1,34 @@
+import { Document } from "@contentful/rich-text-types";
+
+
+export type SlugsForPosts = {
+  customerPostCollection: {
+    items: {
+      slug: string;
+    }[];
+  };
+};
+
+export type CustomerPostQuery = {
+  customerPostCollection: {
+    items: {
+      title: string;
+      slug: string;
+      customer: {
+        logo: {
+          height: number;
+          width: number;
+          url: string;
+        };
+        name: string;
+      };
+      body: {
+        json: Document;
+      };
+    }[];
+  };
+};
+
 export type LogoWallQuery = {
   assetCollection: {
     items: {
@@ -19,6 +50,20 @@ export type HeroQuery = {
         items: {
           link: string;
           label: string;
+        }[];
+      };
+    }[];
+  };
+};
+
+export type NavigationQuery = {
+  navigationCollection: {
+    items: {
+      name: string;
+      linksCollection: {
+        items: {
+          label: string;
+          link: string;
         }[];
       };
     }[];
